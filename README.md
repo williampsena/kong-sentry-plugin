@@ -1,4 +1,4 @@
-# Sentry Kong Plugin
+# Kong Sentry Plugin
 
 ## Description
 The plugin enables behavior to send unhandled errors to sentry using log level (error) at Nginx Lua Context.
@@ -36,5 +36,6 @@ Feel free to open issues, or refer to our Contribution Guidelines if you have an
 
 - https://docs.konghq.com/hub/kong-inc/http-log/
 - https://github.com/Optum/kong-error-log
+- https://sentry.io/
 
 Well, thanks for sharing.
