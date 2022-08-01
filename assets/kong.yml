@@ -1,0 +1,21 @@
+
+_format_version: "1.1"
+
+services:
+- name: unknown
+  url: https://unknown
+
+
+  plugins:
+  - name: sentry
+    config:
+      http_endpoint: https://sentry.io/api/0/store/
+      sentry_key: your_sentry_key
+      timeout: 10000
+      keepalive: 60000
+      retry_count: 2
+      flush_timeout: 2
+  routes:
+  - name: unknown
+    paths:
+    - /

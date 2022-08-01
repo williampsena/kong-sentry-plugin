@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  kong:
+    build: 
+      context: ./
+    environment:
+      KONG_LOG_LEVEL: info
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+      KONG_PLUGINS: "bundled,sentry"
+      KONG_DNS_RESOLVER: "8.8.8.8"
+      KONG_LUA_PACKAGE_PATH: /usr/local/kong/plugins
+      KONG_NGINX_HTTP_LUA_CAPTURE_ERROR_LOG: 100k
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    restart: unless-stopped
+    volumes:
+      - ./assets/kong.yml:/usr/local/kong/declarative/kong.yml:ro
