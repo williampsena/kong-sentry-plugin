@@ -59,6 +59,11 @@ local function send_sentry_event(conf, message, extra)
         return nil, "failed to parse DSN url: " .. conf.sentry_dsn
     end
 
+    local environment = nil
+    if conf.environment_envvar then
+        environment = kong.vault.get(fmt("{vault://env/%s}", conf.environment_envvar))
+    end
+
     local httpc = http.new()
     httpc:set_timeout(conf.timeout)
 
@@ -69,6 +74,7 @@ local function send_sentry_event(conf, message, extra)
         timestamp = timestamp,
         platform = "other",
         server_name = kong.node.get_hostname(),
+        environment = environment,
         logentry = {
             message = message,
         },

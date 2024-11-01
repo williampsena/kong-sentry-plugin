@@ -9,6 +9,7 @@ return {
         type = "record",
         fields = {
           { sentry_dsn = typedefs.url({ required = true }) },
+          { environment_envvar = { type = "string" } },
           { timeout = { type = "number", default = 10000 } },
           { keepalive = { type = "number", default = 60000 } },
           { queue = typedefs.queue() },

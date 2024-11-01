@@ -10,6 +10,7 @@ services:
   - name: sentry
     config:
       sentry_dsn: https://abcdef0123456789abcdef1234567890@sentry.io/0
+      environment_envvar: ENVIRONMENT
       timeout: 10000
       keepalive: 60000
       queue:
