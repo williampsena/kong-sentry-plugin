@@ -30,17 +30,13 @@ local function has_valid_config(conf)
   end
 end
 
-local function is_response_ok()
-  if kong.response.get_status() < 499 then return true else return false end
-end
-
 function SentryHandler:init_worker()
   SentryMessage.set_filter_error_log_level()
 end
 
 function SentryHandler:log(conf)
-  if is_response_ok() or not has_valid_config(conf) then return end
-  -- FOR Testing > kong.log.err("Fake testing")
+
+  if not has_valid_config(conf) then return end
 
   local sentry_errors = SentryMessage.get_sentry_errors()
   if not sentry_errors then return end
