@@ -1,4 +1,4 @@
-FROM kong:2.8.1
+FROM kong:3.8.0
 
 ADD ./sentry /usr/local/custom/kong/plugins/sentry
 

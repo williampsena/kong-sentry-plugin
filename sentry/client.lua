@@ -2,7 +2,7 @@ local cjson = require "cjson"
 local url = require "socket.url"
 local http = require "resty.http"
 local table_clear = require "table.clear"
-local utils = require "kong.tools.utils"
+local uuid = require "kong.tools.uuid"
 
 local parsed_urls_cache = {}
 local headers_cache = {}
@@ -62,7 +62,7 @@ local function send_sentry_event(conf, message, extra)
     local httpc = http.new()
     httpc:set_timeout(conf.timeout)
 
-    local event_id = string.gsub(utils.uuid(), "-", "")
+    local event_id = string.gsub(uuid.uuid(), "-", "")
     local timestamp = ngx.now()
     local event = cjson.encode({
         event_id = event_id,

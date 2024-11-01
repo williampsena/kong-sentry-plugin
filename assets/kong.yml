@@ -12,8 +12,10 @@ services:
       sentry_dsn: https://abcdef0123456789abcdef1234567890@sentry.io/0
       timeout: 10000
       keepalive: 60000
-      retry_count: 2
-      flush_timeout: 2
+      queue:
+        max_retry_time: 30
+        max_coalescing_delay: 2
+        max_entries: 10000
   routes:
   - name: unknown
     paths:
