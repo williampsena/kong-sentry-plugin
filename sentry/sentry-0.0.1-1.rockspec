@@ -10,7 +10,7 @@ source = {
 description = {
   summary = "Kong plugin to inject kong errors on sentry.",
   homepage = "https://github.com/williampsena/kong-sentry-plugin",
-  license = "-"
+  license = "MIT"
 }
 
 dependencies = {
