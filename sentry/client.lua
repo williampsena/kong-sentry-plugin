@@ -117,7 +117,7 @@ local function send_sentry_event(conf, message, extra)
             response_body
     end
 
-    kong.log.notice("Sentry error dispatched:", payload)
+    kong.log.debug("Sentry error dispatched:", payload)
 
     return success, err_msg
 end
