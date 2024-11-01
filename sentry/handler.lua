@@ -21,7 +21,7 @@ local function send_to_sentry(conf, sentry_error)
 end
 
 local function has_valid_config(conf)
-  if conf.http_endpoint or conf.sentry_key then
+  if conf.sentry_dsn then
     return true
   else
     return false

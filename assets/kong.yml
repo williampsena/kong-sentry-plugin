@@ -9,8 +9,7 @@ services:
   plugins:
   - name: sentry
     config:
-      http_endpoint: https://sentry.io/api/0/store/
-      sentry_key: your_sentry_key
+      sentry_dsn: https://abcdef0123456789abcdef1234567890@sentry.io/0
       timeout: 10000
       keepalive: 60000
       retry_count: 2

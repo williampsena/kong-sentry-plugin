@@ -2,6 +2,7 @@ local cjson = require "cjson"
 local url = require "socket.url"
 local http = require "resty.http"
 local table_clear = require "table.clear"
+local utils = require "kong.tools.utils"
 
 local parsed_urls_cache = {}
 local headers_cache = {}
@@ -48,32 +49,51 @@ end
 -- @return `tuple` a tuple that indicates success or failed message.
 -- succes, err_msg
 local function send_sentry_event(conf, message, extra)
-    local http_endpoint = conf.http_endpoint
+
+    local http_endpoint = conf.sentry_dsn
     local parsed_url = parse_url(http_endpoint)
     local host = parsed_url.host
     local port = tonumber(parsed_url.port)
+    local sentry_key = parsed_url.user
+    if not sentry_key then
+        return nil, "failed to parse DSN url: " .. conf.sentry_dsn
+    end
 
     local httpc = http.new()
     httpc:set_timeout(conf.timeout)
 
-    local payload = cjson.encode({
-        message = message,
-        timestamp = os.time(os.date("!*t")),
-        extra = extra
+    local event_id = string.gsub(utils.uuid(), "-", "")
+    local timestamp = ngx.now()
+    local event = cjson.encode({
+        event_id = event_id,
+        timestamp = timestamp,
+        platform = "other",
+        server_name = kong.node.get_hostname(),
+        logentry = {
+            message = message,
+        },
+        extra = extra,
     })
+    local event_header = cjson.encode({
+        event_id = event_id,
+        dsn = conf.sentry_dsn,
+    })
+    local type_header = cjson.encode({
+        type = "event",
+        length = #event,
+    })
+    local payload = event_header .. "\n" .. type_header .. "\n" .. event
 
     table_clear(headers_cache)
 
-    headers_cache["Content-Type"] = "application/json"
-    headers_cache["X-Sentry-Auth"] = "Sentry sentry_version=7, sentry_key=" .. conf.sentry_key .. ", sentry_client=raven-bash/0.1"
-    headers_cache["Host"] = host
-    headers_cache["Content-Length"] = #payload
+    headers_cache["Content-Type"] = "application/x-sentry-envelope"
+    headers_cache["X-Sentry-Auth"] = "Sentry sentry_version=7, sentry_key=" .. sentry_key .. ", sentry_timestamp=" .. timestamp
 
     params_cache.method = "POST"
     params_cache.body = payload
     params_cache.keepalive_timeout = conf.keepalive
 
-    local url = fmt("%s://%s:%d%s", parsed_url.scheme, parsed_url.host, parsed_url.port, parsed_url.path)
+    local url = fmt("%s://%s:%d/api%s/envelope/", parsed_url.scheme, parsed_url.host, parsed_url.port, parsed_url.path)
     local res, err = httpc:request_uri(url, params_cache)
 
     if not res then
