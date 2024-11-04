@@ -5,7 +5,7 @@ on:
   pull_request: {}
   push:
     branches:
-    - master
+      - master
 
 jobs:
   test:
@@ -16,8 +16,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Pongo
-        run: |          
-          make install
+        run: |
+          (cd /tmp && git clone https://github.com/Kong/kong-pongo.git)
+          sudo ln -sf /tmp/kong-pongo/pongo.sh /usr/local/bin/pongo
+          sudo chmod +x /usr/local/bin/pongo
 
       - name: Run tests
         run: |

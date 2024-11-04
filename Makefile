@@ -15,6 +15,7 @@ down:
 
 pongo:
 	(cd /tmp && git clone https://github.com/Kong/kong-pongo.git)
+	mkdir -p $(HOME)/.local/bin
 	ln -sf /tmp/kong-pongo/pongo.sh $(HOME)/.local/bin/pongo
 
 lint:
