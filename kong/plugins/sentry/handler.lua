@@ -38,7 +38,12 @@ end
 
 function SentryHandler:log(conf)
   if is_response_ok() or not has_valid_config(conf) then return end
-  -- FOR Testing > kong.log.err("Fake testing")
+  
+  kong.log.debug("starting sentry handler")
+  
+  -- FOR Testing >
+  if conf.sentry_key == "testing" then kong.log.err("fake error testing") end
+
 
   SentryMessage.set_filter_error_log_level()
   local sentry_errors = SentryMessage.get_sentry_errors()
