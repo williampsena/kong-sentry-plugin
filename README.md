@@ -1,16 +1,17 @@
 # 🦍 Kong Sentry Plugin 
 
-## Description
+![test status](https://github.com/williampsena/kong-sentry-plugin/actions/workflows/plugin-tests.yml/badge.svg?branch=main)
+
 The plugin enables the behavior of sending unhandled errors to sentry via log level (error) in the Nginx Lua Context.
 
 
-## Testing
+## Tests
 You can test plugin behaviors using docker; just remember to set your URL and credentials at plugin configurations `./assets/kong.yml`.
 
 - Run containers
 
 ```shell
-dockercompose up
+docker compose up
 ```
 
 Send request to Kong, and will fail in order to sent event to sentry, because unknown HOST does not exits.
