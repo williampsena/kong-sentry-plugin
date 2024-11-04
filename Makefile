@@ -3,7 +3,7 @@ LUA_BIN := $(PWD)/packages/bin
 KONG_VERSION := "2.8.1"
 
 install:
-	pongo
+	$(MAKE) pongo
 	
 up:
 	docker compose up -d mock
@@ -15,7 +15,7 @@ down:
 
 pongo:
 	(cd /tmp && git clone https://github.com/Kong/kong-pongo.git)
-	ln -s /tmp/kong-pongo/pongo.sh $(HOME)/.local/bin/pongo
+	ln -sf /tmp/kong-pongo/pongo.sh $(HOME)/.local/bin/pongo
 
 lint:
 	pongo lint
