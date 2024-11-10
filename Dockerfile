@@ -1,9 +1,10 @@
 FROM kong:2.8.1
 
-ADD ./sentry /usr/local/custom/kong/plugins/sentry
+COPY sentry-0.0.1-1.rockspec /usr/local/custom/
+COPY ./kong/plugins /usr/local/custom/kong/plugins
 
 USER root
 
-RUN (cd /usr/local/custom/kong/plugins/sentry && luarocks make)
+RUN (cd /usr/local/custom/ && luarocks make sentry-0.0.1-1.rockspec)
 
 USER kong
