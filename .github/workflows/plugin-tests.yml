@@ -2,10 +2,13 @@ name: Plugin tests
 run-name: Plugin tests in [${{ github.ref_name }}] @${{ github.actor }}
 
 on:
-  pull_request: {}
   push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
+
 
 jobs:
   test:
