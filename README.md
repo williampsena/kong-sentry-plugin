@@ -1,6 +1,6 @@
 # 🦍 Kong Sentry Plugin 
 
-![test status](https://github.com/williampsena/kong-sentry-plugin/actions/workflows/plugin-tests.yml/badge.svg?branch=main)
+![test status](https://github.com/williampsena/kong-sentry-plugin/actions/workflows/plugin-tests.yml/badge.svg)
 
 The plugin enables the behavior of sending unhandled errors to sentry via log level (error) in the Nginx Lua Context.
 
