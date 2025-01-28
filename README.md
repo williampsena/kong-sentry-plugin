@@ -1,21 +1,26 @@
-# Kong Sentry Plugin
+# 🦍 Kong Sentry Plugin 
 
-## Description
-The plugin enables behavior to send unhandled errors to sentry using log level (error) at Nginx Lua Context.
+![test status](https://github.com/williampsena/kong-sentry-plugin/actions/workflows/plugin-tests.yml/badge.svg)
+
+The plugin enables the behavior of sending unhandled errors to sentry via log level (error) in the Nginx Lua Context.
 
 
-## Testing
-You can test plugin behaviors using docker, don't forget to set your URL and credentials at plugin configurations (./assets/kong.yml)
+## Tests
+You can test plugin behaviors using docker; just remember to set your URL and credentials at plugin configurations `./assets/kong.yml`.
 
-Run containers ->
+- Run containers
 
-```docker-compose up```
+```shell
+docker compose up
+```
 
 Send request to Kong, and will fail in order to sent event to sentry, because unknown HOST does not exits.
 
-```curl -X GET http://localhost:8000```
+```shell
+curl -X GET http://localhost:8000
+```
 
-Nice, you will see an error in your Sentry Self Hosted or Sentry.io.
+You will notice an error in your Sentry Self Hosted or Sentry.io.
 
 ## Configurations
 
@@ -30,7 +35,7 @@ Nice, you will see an error in your Sentry Self Hosted or Sentry.io.
 
 ## Maintainers
 
-Feel free to open issues, or refer to our Contribution Guidelines if you have any questions.
+If you have any queries, please submit an issue or see our Contribution Guidelines.
 
 ## References 
 
