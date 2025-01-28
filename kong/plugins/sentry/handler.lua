@@ -11,7 +11,7 @@ local queues = {}
 local fmt = string.format
 
 local function get_queue_id(conf)
-  return fmt("%s:%s", conf.http_endpoint, conf.sentry_key)
+  return fmt("sentry:%s", conf.sentry_dsn)
 end
 
 local function send_to_sentry(conf, entries)
