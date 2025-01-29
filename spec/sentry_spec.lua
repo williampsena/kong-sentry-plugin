@@ -40,8 +40,7 @@ for _, strategy in helpers.all_strategies() do
                     name = PLUGIN_NAME,
                     route = {id = ok_route.id},
                     config = {
-                        http_endpoint = "https://localhost:4000/ok",
-                        sentry_key = "foo"
+                        sentry_dsn = "https://abcdef0123456789abcdef1234567890@localhost:4000/0"
                     }
                 }
 
@@ -50,8 +49,7 @@ for _, strategy in helpers.all_strategies() do
                     name = PLUGIN_NAME,
                     route = {id = error_route.id},
                     config = {
-                        http_endpoint = "https://localhost:4000/error",
-                        sentry_key = "testing"
+                        sentry_dsn = "https://abcdef0123456789abcdef1234567890@localhost:4000/0"
                     }
                 }
 

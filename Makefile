@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 LUA_BIN := $(PWD)/packages/bin
-KONG_VERSION := "2.8.1"
+KONG_VERSION := "3.8.0"
 
 install:
 	$(MAKE) pongo
