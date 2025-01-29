@@ -3,7 +3,7 @@ _format_version: "3.0"
 plugins:
 - name: sentry
   config:
-    sentry_dsn: https://abcdef0123456789abcdef1234567890@localhost:4000/0
+    sentry_dsn: http://abcdef0123456789abcdef1234567890@mock:4000/0
     environment_envvar: ENVIRONMENT
     timeout: 10000
     keepalive: 60000
@@ -21,8 +21,8 @@ services:
     paths:
     - /
 
-- name: httpbin-200
-  url: https://httpbin.org/status/200
+- name: mock-ok
+  url: http://mock:4000/ok
   
   routes:
   - name: works-fine

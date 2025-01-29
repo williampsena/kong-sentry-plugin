@@ -17,7 +17,6 @@ services:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
       KONG_PLUGINS: "bundled,sentry"
-      KONG_DNS_RESOLVER: "8.8.8.8"
       KONG_LUA_PACKAGE_PATH: /usr/local/kong/plugins
       KONG_NGINX_HTTP_LUA_CAPTURE_ERROR_LOG: 100k
     ports:
