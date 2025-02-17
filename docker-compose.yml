@@ -23,6 +23,7 @@ services:
     ports:
       - "8000:8000"
       - "8001:8001"
+      - "8002:8002"
     restart: unless-stopped
     volumes:
       - ./assets/kong.yml:/usr/local/kong/declarative/kong.yml:ro
