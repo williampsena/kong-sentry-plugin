@@ -1,11 +1,20 @@
+local typedefs = require "kong.db.schema.typedefs"
+
 return {
-  no_consumer = false,
+  name = "sentry",
   fields = {
-    http_endpoint = { type = "string", required = true },
-    sentry_key = { type = "string", required = true },
-    timeout = { type = "number", default = 10000 },
-    keepalive = { type = "number", default = 60000 },
-    retry_count = { type = "number", default = 2 },
-    flush_timeout = { type = "number", default = 2 }
-  }
+    { consumer = typedefs.no_consumer },
+    { protocols = typedefs.protocols_http },
+    { config = {
+        type = "record",
+        fields = {
+          { sentry_dsn = typedefs.url({ required = true }) },
+          { environment_envvar = { type = "string" } },
+          { timeout = { type = "number", default = 10000 } },
+          { keepalive = { type = "number", default = 60000 } },
+          { queue = typedefs.queue() },
+        },
+      },
+    },
+  },
 }

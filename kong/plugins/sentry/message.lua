@@ -43,6 +43,10 @@ local function get_error_type(message)
     error_type = "Key Auth Error"
   elseif is_match(message, '\\[cassandra\\]') then
     error_type = "Cassandra Error"
+  elseif is_match(message, '\\[post-function\\]') then
+    error_type = "Post-function Error"
+  elseif is_match(message, '\\[pre-function\\]') then
+    error_type = "Pre-function Error"
   elseif is_match(message, '\\[kong\\]') then
     error_type = "Kong Error"
   elseif is_match(message, '\\[lua\\]') then
